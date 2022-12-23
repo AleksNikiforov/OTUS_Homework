@@ -5,16 +5,13 @@ from homework_02.base import Vehicle
 from homework_02.exceptions import CargoOverload
 
 
-
 class Plane(Vehicle):
     cargo = 0
     max_cargo = 0
 
-
     def __init__(self, weight, fuel, fuel_consumption, max_cargo):
         super().__init__(weight, fuel, fuel_consumption)
         self.max_cargo = max_cargo
-
 
     def load_cargo(self, weight):
         actual_cargo = self.cargo + weight
@@ -22,7 +19,6 @@ class Plane(Vehicle):
             self.cargo = actual_cargo
         else:
             raise CargoOverload('Overload')
-
 
     def remove_all_cargo(self):
         cargo_now = self.cargo
