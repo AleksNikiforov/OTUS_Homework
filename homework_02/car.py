@@ -6,7 +6,10 @@ from homework_02.engine import Engine
 
 
 class Car(Vehicle):
-    engine = False
+    def __init__(self, weight=1500, fuel=50, fuel_consumption=10, started=False):
+        super().__init__(weight, fuel, fuel_consumption, started)
+        self.engine = None
 
-    def set_engine(self, engine=Engine()):
+    def set_engine(self, engine: Engine):
         self.engine = engine
+
