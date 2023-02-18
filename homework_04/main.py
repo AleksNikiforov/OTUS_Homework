@@ -7,7 +7,8 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-from models import async_engine, async_session, Base
+from base import async_engine, async_session, Base
+from models import User, Post
 """
 Домашнее задание №4
 Асинхронная работа с сетью и бд
