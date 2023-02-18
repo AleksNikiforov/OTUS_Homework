@@ -1,3 +1,13 @@
+import asyncio
+from sqlalchemy import select, func
+from sqlalchemy.engine import Result
+from sqlalchemy.ext.asyncio import (
+    AsyncEngine,
+    AsyncSession,
+    create_async_engine,
+)
+
+from models import async_engine, async_session, Base
 """
 Домашнее задание №4
 Асинхронная работа с сетью и бд
@@ -13,14 +23,47 @@
 - закрытие соединения с БД
 """
 
+async def create_tables():
+    async with async_engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+        await conn.run_sync(Base.metadata.create_all)
+
+
+# async def create_user(session: AsyncSession, username: str, is_staff=False) -> User:
+#     user = User(username=username, is_staff=is_staff)
+#     session.add(user)
+#     await session.commit()
+#     print("created user", user)
+#     return user
+
+
+# async def create_posts(session: AsyncSession, author: Author, *titles: str) -> list[Post]:
+#     posts = [Post(author=author, title=title) for title in titles]
+#     session.add_all(posts)
+#     await session.commit()
+#     print(posts)
+#     return posts
+
 
 async def async_main():
-    pass
+    create_tables()
+'''
+(
+users_data: List[dict]
+posts_data: List[dict]
+users_data, posts_data = await asyncio.gather(
+                  fetch_users_data(),
+                  fetch_posts_data(),
+)
+'''
 
 
 def main():
-    pass
+  pass
+  #await async_main()
 
 
 if __name__ == "__main__":
-    main()
+  asyncio.run(create_tables())
+  #asyncio.run(main())
+
