@@ -1,5 +1,5 @@
 import asyncio
-import logging
+from logger import log
 from sqlalchemy import select, func
 from sqlalchemy.engine import Result
 from sqlalchemy.ext.asyncio import (
@@ -7,25 +7,17 @@ from sqlalchemy.ext.asyncio import (
     AsyncSession,
     create_async_engine,
 )
-from base import async_engine, async_session, Base
-from models import User, Post
+#from base import async_engine, async_session, Base
+from models import User, Post, async_engine, Session, Base
 from jsonplaceholder_requests import get_users_data, get_posts_data
 
-
-logging.basicConfig(
-    format="[%(asctime)s.%(msecs)03d] %(module)s:%(lineno)d %(levelname)s - %(message)s",
-    level=logging.DEBUG,
-    datefmt="%Y-%m-%d %H:%M:%S",
-)
-
-log = logging.getLogger(__name__)
 
 async def create_tables():
   log.info("Starting create tables")
   async with async_engine.begin() as conn:
       await conn.run_sync(Base.metadata.drop_all)
       await conn.run_sync(Base.metadata.create_all)
-      log.info("Stop create tables")
+      log.info("Tables created")
 
 
 async def create_user(session: AsyncSession, name: str, username: str, email: str):
@@ -36,7 +28,7 @@ async def create_user(session: AsyncSession, name: str, username: str, email: st
   log.info("Created user %s", name)
 
     
-async def create_posts(session: AsyncSession, user_id: int, title: str, body: str):
+async def create_post(session: AsyncSession, user_id: int, title: str, body: str):
   log.info("Starting create post %s", user_id)
   post = Post(user_id=user_id, title=title, body=body)
   session.add(post)
@@ -52,11 +44,11 @@ async def async_main():
     )
   log.info("Collected users_data and posts_data")
   log.info("Starting add users_data and posts_data to DB")
-  async with async_session() as session:
+  async with Session() as session:
         for user_data in users_data:
           await create_user(session, user_data['name'], user_data['username'], user_data['email'])
         for post_data in posts_data:
-          await create_posts(session, post_data['userId'], post_data['title'], post_data['body'])
+          await create_post(session, post_data['userId'], post_data['title'], post_data['body'])
 
 
 async def main():
