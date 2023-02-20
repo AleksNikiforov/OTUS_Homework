@@ -23,6 +23,6 @@ class Base:
     id = Column(Integer, primary_key=True)
 
 
-async_engine = create_async_engine(url=config.DB_URL, echo=True)
+async_engine = create_async_engine(url=config.DB_URL, echo=config.DB_ECHO)
 Base = declarative_base(cls=Base)
 async_session = sessionmaker(async_engine, class_=AsyncSession, expire_on_commit=False)

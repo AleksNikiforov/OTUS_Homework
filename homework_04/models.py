@@ -1,41 +1,20 @@
-from sqlalchemy import Column, Text, String
+from sqlalchemy import Column, Text, String, ForeignKey, Integer
 from sqlalchemy.orm import relationship
 from base import Base
 
-"""
-создайте алхимичный engine
-добавьте declarative base (свяжите с engine)
-создайте объект Session
-добавьте модели User и Post, объявите поля:
-для модели User обязательными являются name, username, email
-для модели Post обязательными являются user_id, title, body
-создайте связи relationship между моделями: User.posts и Post.user
-
-- доработайте модуль `models`:
-    - создайте асинхронный алхимичный `engine` (при помощи `create_async_engine`)
-    - добавьте `declarative base`
-    - создайте объект `Session` на основе класса `AsyncSession`
-    - добавьте модели `User` и `Post`, объявите поля:
-        - для модели `User` обязательными являются `name`, `username`, `email`
-        - для модели `Post` обязательными являются `user_id`, `title`, `body`
-        - создайте связи `relationship` между моделями: `User.posts` и `Post.user`
-"""
-
-
 
 class User(Base):
-    name = Column(String(20), unique=False, nullable=False)
-    username = Column(String(20), unique=True, nullable=False)
+    name = Column(String(40), unique=False, nullable=False)
+    username = Column(String(40), unique=True, nullable=False)
     email = Column(String(40), default=False, nullable=False)
-
     posts = relationship("Post", back_populates="user")
 
 
 class Post(Base):
-    user_id = Column(String(100), nullable=False, default="", server_default="")
+    user_id = Column(Integer, nullable=False, unique=False)
     title = Column(Text, nullable=False, default="", server_default="")
     body = Column(Text, nullable=False, default="", server_default="")
-
+    user_id_this_post = Column(Integer, ForeignKey("blog_users.id"), nullable=True, unique=False)
     user = relationship("User", back_populates="posts")
 
 

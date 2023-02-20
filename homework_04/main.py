@@ -1,4 +1,5 @@
 import asyncio
+import logging
 from sqlalchemy import select, func
 from sqlalchemy.engine import Result
 from sqlalchemy.ext.asyncio import (
@@ -6,65 +7,62 @@ from sqlalchemy.ext.asyncio import (
     AsyncSession,
     create_async_engine,
 )
-
 from base import async_engine, async_session, Base
 from models import User, Post
-"""
-Домашнее задание №4
-Асинхронная работа с сетью и бд
+from jsonplaceholder_requests import get_users_data, get_posts_data
 
-доработайте функцию main, по вызову которой будет выполняться полный цикл программы
-(добавьте туда выполнение асинхронной функции async_main):
-- создание таблиц (инициализация)
-- загрузка пользователей и постов
-    - загрузка пользователей и постов должна выполняться конкурентно (параллельно)
-      при помощи asyncio.gather (https://docs.python.org/3/library/asyncio-task.html#running-tasks-concurrently)
-- добавление пользователей и постов в базу данных
-  (используйте полученные из запроса данные, передайте их в функцию для добавления в БД)
-- закрытие соединения с БД
-"""
+
+logging.basicConfig(
+    format="[%(asctime)s.%(msecs)03d] %(module)s:%(lineno)d %(levelname)s - %(message)s",
+    level=logging.DEBUG,
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+
+log = logging.getLogger(__name__)
 
 async def create_tables():
-    async with async_engine.begin() as conn:
-        await conn.run_sync(Base.metadata.drop_all)
-        await conn.run_sync(Base.metadata.create_all)
+  log.info("Starting create tables")
+  async with async_engine.begin() as conn:
+      await conn.run_sync(Base.metadata.drop_all)
+      await conn.run_sync(Base.metadata.create_all)
+      log.info("Stop create tables")
 
 
-# async def create_user(session: AsyncSession, username: str, is_staff=False) -> User:
-#     user = User(username=username, is_staff=is_staff)
-#     session.add(user)
-#     await session.commit()
-#     print("created user", user)
-#     return user
+async def create_user(session: AsyncSession, name: str, username: str, email: str):
+  log.info("Starting create user %s", name)
+  user = User(name=name, username=username, email=email)
+  session.add(user)
+  await session.commit()
+  log.info("Created user %s", name)
 
-
-# async def create_posts(session: AsyncSession, author: Author, *titles: str) -> list[Post]:
-#     posts = [Post(author=author, title=title) for title in titles]
-#     session.add_all(posts)
-#     await session.commit()
-#     print(posts)
-#     return posts
+    
+async def create_posts(session: AsyncSession, user_id: int, title: str, body: str):
+  log.info("Starting create post %s", user_id)
+  post = Post(user_id=user_id, title=title, body=body)
+  session.add(post)
+  await session.commit()
+  log.info("Created post %s", title)
 
 
 async def async_main():
-    create_tables()
-'''
-(
-users_data: List[dict]
-posts_data: List[dict]
-users_data, posts_data = await asyncio.gather(
-                  fetch_users_data(),
-                  fetch_posts_data(),
-)
-'''
+  log.info("Starting collect users_data and posts_data")
+  users_data, posts_data = await asyncio.gather(
+        get_users_data(),
+        get_posts_data(),
+    )
+  log.info("Collected users_data and posts_data")
+  log.info("Starting add users_data and posts_data to DB")
+  async with async_session() as session:
+        for user_data in users_data:
+          await create_user(session, user_data['name'], user_data['username'], user_data['email'])
+        for post_data in posts_data:
+          await create_posts(session, post_data['userId'], post_data['title'], post_data['body'])
 
 
-def main():
-  pass
-  #await async_main()
+async def main():
+  await create_tables()
+  await async_main()
 
 
 if __name__ == "__main__":
-  asyncio.run(create_tables())
-  #asyncio.run(main())
-
+  asyncio.run(main())
