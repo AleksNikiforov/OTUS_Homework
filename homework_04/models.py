@@ -20,7 +20,7 @@ class Base:
         User -> blog_users
         Author -> blog_authors
         """
-        return f"{cls.__name__.lower()}"
+        return f"blog_{cls.__name__.lower()}s"
 
     id = Column(Integer, primary_key=True)
 
@@ -41,7 +41,7 @@ class User(Base):
 class Post(Base):
     title = Column(Text, nullable=False, default="", server_default="")
     body = Column(Text, nullable=False, default="", server_default="")
-    user_id = Column(Integer, ForeignKey("user.id"), nullable=False, unique=False)
+    user_id = Column(Integer, ForeignKey("blog_users.id"), nullable=False, unique=False)
 
     user = relationship("User", back_populates="posts")
 
