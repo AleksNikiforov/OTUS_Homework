@@ -1,5 +1,4 @@
 import aiohttp
-import asyncio
 from logger import log
 
 
