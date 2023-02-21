@@ -1,6 +1,5 @@
 from sqlalchemy import Column, Text, String, ForeignKey, Integer
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Text, String, Integer
 from sqlalchemy.orm import (
     sessionmaker,
     declarative_base,
@@ -44,6 +43,3 @@ class Post(Base):
     user_id = Column(Integer, ForeignKey("blog_users.id"), nullable=False, unique=False)
 
     user = relationship("User", back_populates="posts")
-
-
-
