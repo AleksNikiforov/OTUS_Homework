@@ -1,6 +1,5 @@
 from sqlalchemy import Column, Text, String, ForeignKey, Integer
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Text, String, Integer
 from sqlalchemy.orm import (
     sessionmaker,
     declarative_base,
@@ -25,7 +24,7 @@ class Base:
     id = Column(Integer, primary_key=True)
 
 
-async_engine = create_async_engine(url=config.DB_URL, echo=config.DB_ECHO)
+async_engine = create_async_engine(url=config.PG_CONN_URI, echo=config.DB_ECHO)
 Base = declarative_base(cls=Base)
 Session = sessionmaker(async_engine, class_=AsyncSession, expire_on_commit=False)
 
@@ -44,6 +43,3 @@ class Post(Base):
     user_id = Column(Integer, ForeignKey("blog_users.id"), nullable=False, unique=False)
 
     user = relationship("User", back_populates="posts")
-
-
-
