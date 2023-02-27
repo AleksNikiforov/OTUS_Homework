@@ -21,11 +21,13 @@ async def drop_tables():
 async def create_user(session: AsyncSession, name: str, username: str, email: str):
   user = User(name=name, username=username, email=email)
   session.add(user)
+  await session.commit()
 
     
 async def create_post(session: AsyncSession, user_id: int, title: str, body: str):
   post = Post(user_id=user_id, title=title, body=body)
   session.add(post)
+  await session.commit()
 
 
 async def async_main():
@@ -38,10 +40,10 @@ async def async_main():
   async with Session() as session:
         for user in users_data:
           await create_user(session=session, name=user.get('name'), username=user.get('username'), email=user.get('email'))
-        await session.commit()
+        #await session.commit()
         for post in posts_data:
           await create_post(session=session, user_id=post.get('userId'), title=post.get('title'), body=post.get('body'))
-        await session.commit()
+        #await session.commit()
 
 
 async def main():
