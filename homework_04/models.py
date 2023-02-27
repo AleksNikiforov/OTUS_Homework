@@ -24,7 +24,7 @@ class Base:
     id = Column(Integer, primary_key=True)
 
 
-async_engine = create_async_engine(url=config.DB_URL, echo=config.DB_ECHO)
+async_engine = create_async_engine(url=config.PG_CONN_URI, echo=config.DB_ECHO)
 Base = declarative_base(cls=Base)
 Session = sessionmaker(async_engine, class_=AsyncSession, expire_on_commit=False)
 
