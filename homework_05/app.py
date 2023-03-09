@@ -28,7 +28,11 @@ def about_view():
     return render_template("about.html")
 
 
+@app.get("/getdata/")
+def get_data():
+    return render_template("getdata.html")
+
 if __name__ == "__main__":
     app.run(
-        debug=False,
+        debug=True,
     )
