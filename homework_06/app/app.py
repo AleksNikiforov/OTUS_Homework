@@ -10,9 +10,16 @@ Flask приложение должно запускаться не в debug р�
 from flask import Flask, render_template
 from async_db import async_get_data
 
+from models import Post, User
+from flask_sqlalchemy import SQLAlchemy
 
 
+
+db = SQLAlchemy() # db intitialized here
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+pg8000://username:passwd!@localhost:5432/blog"
+db.init_app(app)
+
 
 
 @app.get("/")
@@ -29,6 +36,24 @@ def about_view():
 async def get_data():
     await async_get_data()
     return render_template("getdata.html")
+
+
+@app.get("/list_of_posts", endpoint = 'list_of_posts')
+def get_posts_list():
+    posts = db.session.query(Post).all()
+    return render_template(
+        "list_of_posts.html",
+        posts=posts,
+    )
+
+
+@app.get("/list_of_users", endpoint = 'list_of_users')
+def get_products_list():
+    users = db.session.query(User).all() 
+    return render_template(
+        "list_of_users.html",
+        users=users,
+    )
 
 
 if __name__ == "__main__":
