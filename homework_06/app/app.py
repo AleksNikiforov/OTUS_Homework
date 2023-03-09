@@ -82,15 +82,11 @@ def delete_users():
 def create_post():
     form = PostForm()
     if request.method == "GET":
-        users = db.session.query(User).all() 
-        return render_template(
-        "list_of_posts.html",
-        users=users,
-    )
+        return render_template("create_post.html", form=form)
 
     if not form.validate_on_submit():
         return (
-            render_template("list_of_posts.html", form=form),
+            render_template("create_post.html", form=form),
             HTTPStatus.BAD_REQUEST,
         )
 
@@ -101,7 +97,7 @@ def create_post():
     db.session.add(post)
     db.session.commit()
     flash(f"Post {post.title} was created!", category="success")
-    url = url_for("list_of_posts.html")
+    url = url_for("list_of_posts")
     return redirect(url)
 
 

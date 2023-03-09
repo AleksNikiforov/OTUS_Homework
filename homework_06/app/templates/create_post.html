@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 <title>
   {% block title %}
   Del_Posts
@@ -13,13 +14,25 @@
     {{ form.csrf_token }}
     <div class="mb-3">
       {{ form.title.label(class="form-label") }}
-      {{ form_errors_list(form.title.errors) }}
+      {% if errors_list %}
+      <ul class="alert alert-danger">
+        {% for error in errors_list %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
       {{ form.title(class="form-control") }}
     </div>
     <div class="mb-3">
       {{ form.body.label(class="form-label") }}
-      {{ form_errors_list(form.short_description.errors) }}
-      {{ form.boddy(class="form-control") }}
+      {% if errors_list %}
+      <ul class="alert alert-danger">
+        {% for error in errors_list %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+      {{ form.body(class="form-control") }}
     </div>
 
 <div class="button-wrapper">
@@ -28,7 +41,7 @@
   </form>
 
   <div class="my-3">
-    <a class="btn btn-secondary" href="{{ url_for('app.list_of_posts') }}">
+    <a class="btn btn-secondary" href="{{ url_for('list_of_posts') }}">
       Back to post list
     </a>
   </div>
