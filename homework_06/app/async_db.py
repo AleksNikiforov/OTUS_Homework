@@ -15,13 +15,12 @@ async def create_user(session: AsyncSession, name: str, username: str, email: st
     session.add(user)
 
     
-async def create_post(session: AsyncSession, user_id: int, title: str, body: str):
-    post = Post(user_id=user_id, title=title, body=body)
+async def create_post(session: AsyncSession, title: str, body: str):
+    post = Post(title=title, body=body)
     session.add(post)
 
 
 async def async_get_data():
-    #await drop_tables()
     await create_tables()
     users_data, posts_data = await asyncio.gather(
           get_users_data(),
@@ -32,5 +31,5 @@ async def async_get_data():
             await create_user(session=session, name=user.get('name'), username=user.get('username'), email=user.get('email'))
           await session.commit()
           for post in posts_data:
-            await create_post(session=session, user_id=post.get('userId'), title=post.get('title'), body=post.get('body'))
+            await create_post(session=session, title=post.get('title'), body=post.get('body'))
           await session.commit()

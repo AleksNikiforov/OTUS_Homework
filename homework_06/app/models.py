@@ -34,12 +34,7 @@ class User(Base):
     username = Column(String(40), unique=False, nullable=False)
     email = Column(String(40), default=False, nullable=False)
 
-    posts = relationship("Post", back_populates="user")
-
 
 class Post(Base):
     title = Column(Text, nullable=False, default="", server_default="")
     body = Column(Text, nullable=False, default="", server_default="")
-    user_id = Column(Integer, ForeignKey("blog_users.id"), nullable=False, unique=False)
-
-    user = relationship("User", back_populates="posts")

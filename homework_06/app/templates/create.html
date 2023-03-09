@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+<title>
+  {% block title %}
+  Del_Posts
+  {% endblock %}
+</title>
+
+{% block body %}
+  <h2>Create a new post:</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+    <div class="mb-3">
+      {{ form.title.label(class="form-label") }}
+      {{ form_errors_list(form.title.errors) }}
+      {{ form.title(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.body.label(class="form-label") }}
+      {{ form_errors_list(form.short_description.errors) }}
+      {{ form.boddy(class="form-control") }}
+    </div>
+
+<div class="button-wrapper">
+    <button id="btn-create" class="btn btn-primary" type="submit">Create</button>
+</div>
+  </form>
+
+  <div class="my-3">
+    <a class="btn btn-secondary" href="{{ url_for('app.list_of_posts') }}">
+      Back to post list
+    </a>
+  </div>
+{% endblock %}
