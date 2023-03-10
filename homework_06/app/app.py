@@ -13,6 +13,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_wtf import CSRFProtect
 from views.forms import PostForm, UserForm
 from http import HTTPStatus
+from werkzeug.exceptions import NotFound
 from request_data import get_users_data, get_posts_data
 
 
@@ -42,14 +43,14 @@ def get_data():
             email = user.get('email')
         )
         db.session.add(user)
-        db.session.commit()
+    db.session.commit()
     for post in posts_data:
         post = Post(
             title = post.get('title'),
             body = post.get('body'),
         )
         db.session.add(post)
-        db.session.commit()    
+    db.session.commit()    
     return render_template("getdata.html")
 
 
