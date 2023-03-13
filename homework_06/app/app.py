@@ -18,7 +18,7 @@ from request_data import get_users_data, get_posts_data
 
 
 
-config_name = os.getenv("CONFIG_NAME", "DevelopmentConfig")
+config_name = os.getenv("CONFIG_NAME", "ProductionConfig")
 
 app = Flask(__name__)
 app.config.from_object(f"config.{config_name}")
@@ -126,6 +126,4 @@ def create_post():
 
 
 if __name__ == "__main__":
-    app.run(
-        debug=True,
-    )
+    app.run(host="0.0.0.0")
