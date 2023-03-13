@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+<title>
+  {% block title %}
+  GetData
+  {% endblock %}
+</title>
+
+
+
+  <body>{% block body %}
+
+    <div class="my-3">
+      <a class="btn btn-success" href="{{ url_for('index_view') }}">
+          Back to main page
+      </a>
+
+      <h1>Hello from list_of_posts</h1>
+      <h2>I trying to show you all posts</h2>
+
+    </div>
+     
+    <div>
+      <ul class="list-group">
+        {% for post in posts %}
+          <li class="list-group-item">
+            <a
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              class="product slide-in text-decoration-none"
+            >
+              {{ post.title }}
+              {{ post.body }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </body>{% endblock %}

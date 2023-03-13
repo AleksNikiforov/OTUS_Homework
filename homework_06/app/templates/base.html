@@ -39,10 +39,23 @@
               <a class="nav-link" href="{{ url_for('about_view') }}">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('get_data') }}">Get data</a>
+              <a class="nav-link" href="{{ url_for('get_data') }}">Get Posts and Users</a>
             </li>
-
-          </ul>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('list_of_posts') }}">List of posts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('list_of_users') }}">List of users</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('create') }}">Create post</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('delete_posts') }}">Delete posts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('delete_users') }}">Delete users</a>
+            </li>
         </div>
       </div>
     </nav>
