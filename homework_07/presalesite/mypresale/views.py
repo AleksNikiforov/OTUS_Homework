@@ -1,8 +1,29 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-def index(request): 
-    return HttpResponse('<h1>Главная страница</h1>')
+# def index(request): 
+#     return HttpResponse('<h1>Главная страница</h1>')
+
+menu = [
+        {'title': "О сайте", 'url_name': 'about'},
+        {'title': "Проектно-изыскательские работы", 'url_name': 'design'},
+        {'title': "Обследование СПД", 'url_name': 'examination'},
+        {'title': "Стендирование", 'url_name': 'poc'},
+        {'title': "Монтажные работы", 'url_name': 'install'},
+        {'title': "Пуско-наладочные работы", 'url_name': 'comissioning'},
+        {'title': "Приемо-сдаточные испытания", 'url_name': 'accept'},
+        {'title': "Миграция", 'url_name': 'migration'},
+        {'title': "Прочие работы", 'url_name': 'other_jobs'},
+        {'title': "Подрядчик", 'url_name': 'subcontractor'},
+        {'title': "Другое", 'url_name': 'other'},
+        {'title': "Непридвиденные расходы", 'url_name': 'unenxpected'},
+        {'title': "Командировочные расходы", 'url_name': 'business_trip'},
+        {'title': "Стоимость одного дня", 'url_name': 'rates'},
+        ]
+
+
+def index(request):
+    return render(request, 'mypresale/base.html',  {'menu': menu})
   
 def about(request): 
     return HttpResponse('<h1>О сайте</h1>')
