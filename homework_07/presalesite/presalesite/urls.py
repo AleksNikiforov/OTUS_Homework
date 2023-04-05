@@ -22,4 +22,5 @@ from mypresale.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mypresale.urls')),
+    path('examination/', include('examination.urls')),
 ]
