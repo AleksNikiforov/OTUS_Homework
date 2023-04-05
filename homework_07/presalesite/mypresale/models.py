@@ -1,90 +1,84 @@
 from django.db import models
 
-class design(models.Model):
+class Design(models.Model):
     name = models.CharField(max_length=255, null=True)
     days_architect = models.IntegerField(null=True)
     days_engineer = models.IntegerField(null=True)
     days_manager = models.IntegerField(null=True)
     days_tech_writer = models.IntegerField(null=True)
 
-class examination(models.Model):
+
+class Poc(models.Model):
     name = models.CharField(max_length=255, null=True)
     days_architect = models.IntegerField(null=True)
     days_engineer = models.IntegerField(null=True)
     days_manager = models.IntegerField(null=True)
     days_tech_writer = models.IntegerField(null=True)
 
-class poc(models.Model):
+class Install(models.Model):
     name = models.CharField(max_length=255, null=True)
     days_architect = models.IntegerField(null=True)
     days_engineer = models.IntegerField(null=True)
     days_manager = models.IntegerField(null=True)
     days_tech_writer = models.IntegerField(null=True)
 
-class install(models.Model):
+class Comissioning(models.Model):
     name = models.CharField(max_length=255, null=True)
     days_architect = models.IntegerField(null=True)
     days_engineer = models.IntegerField(null=True)
     days_manager = models.IntegerField(null=True)
     days_tech_writer = models.IntegerField(null=True)
 
-class comissioning(models.Model):
+class Accept(models.Model):
     name = models.CharField(max_length=255, null=True)
     days_architect = models.IntegerField(null=True)
     days_engineer = models.IntegerField(null=True)
     days_manager = models.IntegerField(null=True)
     days_tech_writer = models.IntegerField(null=True)
 
-class accept(models.Model):
+class Migration(models.Model):
     name = models.CharField(max_length=255, null=True)
     days_architect = models.IntegerField(null=True)
     days_engineer = models.IntegerField(null=True)
     days_manager = models.IntegerField(null=True)
     days_tech_writer = models.IntegerField(null=True)
 
-class migration(models.Model):
+class Other_jobs(models.Model):
     name = models.CharField(max_length=255, null=True)
     days_architect = models.IntegerField(null=True)
     days_engineer = models.IntegerField(null=True)
     days_manager = models.IntegerField(null=True)
     days_tech_writer = models.IntegerField(null=True)
 
-class other_jobs(models.Model):
+class Subcontractor(models.Model):
     name = models.CharField(max_length=255, null=True)
     days_architect = models.IntegerField(null=True)
     days_engineer = models.IntegerField(null=True)
     days_manager = models.IntegerField(null=True)
     days_tech_writer = models.IntegerField(null=True)
 
-class subcontractor(models.Model):
+class Other(models.Model):
     name = models.CharField(max_length=255, null=True)
     days_architect = models.IntegerField(null=True)
     days_engineer = models.IntegerField(null=True)
     days_manager = models.IntegerField(null=True)
     days_tech_writer = models.IntegerField(null=True)
 
-class other(models.Model):
+class Unenxpected(models.Model):
     name = models.CharField(max_length=255, null=True)
     days_architect = models.IntegerField(null=True)
     days_engineer = models.IntegerField(null=True)
     days_manager = models.IntegerField(null=True)
     days_tech_writer = models.IntegerField(null=True)
 
-class unenxpected(models.Model):
+class Business_trip(models.Model):
     name = models.CharField(max_length=255, null=True)
     days_architect = models.IntegerField(null=True)
     days_engineer = models.IntegerField(null=True)
     days_manager = models.IntegerField(null=True)
     days_tech_writer = models.IntegerField(null=True)
 
-class business_trip(models.Model):
-    name = models.CharField(max_length=255, null=True)
-    days_architect = models.IntegerField(null=True)
-    days_engineer = models.IntegerField(null=True)
-    days_manager = models.IntegerField(null=True)
-    days_tech_writer = models.IntegerField(null=True)
-
-class rates(models.Model):
+class Rates(models.Model):
     name = models.CharField(max_length=255, null=True)
     days_architect = models.IntegerField(null=True)
     days_engineer = models.IntegerField(null=True)

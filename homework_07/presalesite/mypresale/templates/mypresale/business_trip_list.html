@@ -1,0 +1,48 @@
+{% extends 'mypresale/base.html' %}
+
+{% block content %}
+
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">Командировочные расходы</h1>
+          <!-- <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+          <p> -->
+            <!-- <a href="#" class="btn btn-primary my-2">Main call to action</a>
+            <a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
+          <!-- </p> -->
+        </div>
+      </div>
+    </section>
+
+  {% for item in object_list %} 
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
+            <div class="card-body">
+              <p class="card-text">{{item.title}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+
+                    <form action="/news/news-detail/{{item.id}}/">
+                      <button class="btn btn-primary">Просмотр</button>
+                     </form>
+
+
+                  <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Просмотр</button> -->
+                  <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
+                </div>
+                <small class="text-body-secondary">{{item.time_update|date:"d-m-Y H:i:s"}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endfor %}
+
+  
+    {% endblock %}
