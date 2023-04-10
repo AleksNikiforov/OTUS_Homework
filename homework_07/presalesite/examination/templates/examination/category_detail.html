@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Обследование СПД</h1>
+      </div>
+  
+  
+      {% for item in object_list %} 
+  
+      <table class="table-bordered">
+        <tbody>
+          <tr>
+            <td>{{item.name}}</td>
+          </tr>
+        </tbody>
+      </table>
+      {% endfor %}
+    </div>
+  </section>
+
+{% endblock %}
