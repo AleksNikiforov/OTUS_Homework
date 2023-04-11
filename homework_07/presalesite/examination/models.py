@@ -15,7 +15,7 @@ class Category(models.Model):
     
 
 class Subcategory(models.Model):
-    subcategory = models.ForeignKey(Category, related_name='subcategory', on_delete=models.CASCADE)
+    cat_subcategory = models.ForeignKey(Category, related_name='subcategory', on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
 
     class Meta:
@@ -28,7 +28,7 @@ class Subcategory(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Subcategory, related_name='products', on_delete=models.CASCADE)
+    subcat_product = models.ForeignKey(Subcategory, related_name='products', on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
 
     class Meta:
@@ -41,7 +41,7 @@ class Product(models.Model):
     
 
 class Subproduct(models.Model):
-    category = models.ForeignKey(Product, related_name='subproducts', on_delete=models.CASCADE)
+    prod_subproduct = models.ForeignKey(Product, related_name='subproducts', on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
 
     class Meta:
