@@ -1,19 +1,285 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+  details {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 5px;
+  }
+
+  summary {
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    margin: 5px 0;
+  }
+</style>
+
+    <h5 style="margin-left:20px; font-weight: bold; cursor: pointer;" >Обследование СПД</h5>
+
+    {% for item in object_list %}
+    <form method="POST">
+      {% csrf_token %}
+
+    <details>
+
+      <summary style="margin-left:10px; font-weight:900; cursor: pointer;"
+      >{{item.name}}</summary>
+      <ul>
+        <li>
+          <details>
+            <summary style="margin-left:40px; font-weight:normal; cursor: pointer;">
+              Проектно-изыскательские работы (Предпроектная стадия)
+              <label for="float-input"> || Трудозатраты, дней:</label>
+              <input type="number" step="0.1" id="Проектно-изыскательские работы (Предпроектная стадия)" name="Проектно-изыскательские работы (Предпроектная стадия)" readonly />
+            </summary> 
+            <ul>
+              <li>
+                  <summary style="margin-left:60px; font-weight:normal; cursor: pointer;">
+                    <input style="margin-right:20px;" id="html" type="checkbox">
+                    Обследование сетевой инфраструктуры Заказчика
+                    <label for="float-input"> || Трудозатраты, дней:</label>
+                    <input type="number" step="0.1" id="Обследование сетевой инфраструктуры Заказчика" name="Обследование сетевой инфраструктуры Заказчика" oninput="calculateSum()" />
+                  </summary>
+                </li>
+              <li>
+                  <summary style="margin-left:60px; font-weight:normal; cursor: pointer;">
+                    <input style="margin-right:20px;" id="html" type="checkbox">
+                    Разработка Технического задания
+                    <label for="float-input"> || Трудозатраты, дней:</label>
+                    <input type="number" step="0.1" id="Разработка Технического задания" name="Разработка Технического задания" oninput="calculateSum()" />
+                  </summary>
+              </li>
+              <li>
+                  <summary style="margin-left:60px; font-weight:normal; cursor: pointer;">
+                    <input style="margin-right:20px;" id="html" type="checkbox">
+                    Разработка Эскизного проекта
+                    <label for="float-input"> || Трудозатраты, дней:</label>
+                    <input type="number" step="0.1" id="Разработка Эскизного проекта" name="Разработка Эскизного проекта" oninput="calculateSum()" />
+                  </summary>
+              </li>
+              <li>
+                  <summary style="margin-left:60px; font-weight:normal; cursor: pointer;">
+                    <input style="margin-right:20px;" id="html" type="checkbox">
+                    Разработка Концепции
+                    <label for="float-input"> || Трудозатраты, дней:</label>
+                    <input type="number" step="0.1" id="Разработка Концепции" name="Разработка Концепции" oninput="calculateSum()" />
+                  </summary>
+              </li>
+          </ul>
+          </details>
+        </li>
 
 
-    <h5 style="margin-left:20px;" class="fw-light">Обследование СПД</h5>
 
-    <ul class="list-group">
-      {% for item in object_list %}
-      <li class="list-group-item">
-          <span><a href="sub-category/{{item.id}}/">{{item.name}}</a></span>
+        <li>
+          <details>
+          <summary style="margin-left:40px; font-weight:normal; cursor: pointer;">
+            Проектно-изыскательские работы (Проектная стадия) (ГОСТ 34)
+            <label for="float-input"> || Общие Трудозатраты, дней:</label>
+            <input type="number" step="0.1" id="Проектно-изыскательские работы" name="Проектно-изыскательские работы" readonly />
+          </summary> 
+          <ul>
+            <li>
+              <details>
+                <summary style="margin-left:60px; font-weight:normal; cursor: pointer;">
+                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  Разработка Технорабочего проекта в составе:
+                  <label for="float-input"> || Трудозатраты, дней:</label>
+                  <input type="number" step="0.1" id="Разработка Технорабочего проекта в составе:" name="Разработка Технорабочего проекта в составе:" oninput="calculateSum_gost_34()" />
+                </summary>
+
+                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
+                  <input style="margin-right:20px; margin-top:20px; margin-bottom:20px;" id="html" type="checkbox">
+                  Пояснительная записка
+                  <label for="float-input"> || Трудозатраты, дней:</label>
+                  <input type="number" step="0.1" id="Пояснительная записка" name="Пояснительная записка" oninput="calculateSum_gost_34()" />
+                </summary>
+
+                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
+                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  Спецификация оборудования 
+                  <label for="float-input"> || Трудозатраты, дней:</label>
+                  <input type="number" step="0.1" id="Спецификация оборудования" name="Спецификация оборудования " oninput="calculateSum_gost_34()" />
+                </summary>
+
+                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
+                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  Физическая схема организации связи (L1)
+                  <label for="float-input"> || Трудозатраты, дней:</label>
+                  <input type="number" step="0.1" id="Физическая схема организации связи (L1)" name="Физическая схема организации связи (L1)" oninput="calculateSum_gost_34()" />
+                </summary>
+
+                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
+                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  Логическая схема организации связи (L2)
+                  <label for="float-input"> || Трудозатраты, дней:</label>
+                  <input type="number" step="0.1" id="Логическая схема организации связи (L2)" name="Логическая схема организации связи (L2)" oninput="calculateSum_gost_34()" />
+                </summary>
+
+                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
+                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  Логическая схема организации связи (L3)
+                  <label for="float-input"> || Трудозатраты, дней:</label>
+                  <input type="number" step="0.1" id="Логическая схема организации связи (L3)" name="Логическая схема организации связи (L3)" oninput="calculateSum_gost_34()" />
+                </summary>
+
+                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
+                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  Схема маршрутизации
+                  <label for="float-input"> || Трудозатраты, дней:</label>
+                  <input type="number" step="0.1" id="Схема маршрутизации" name="Схема маршрутизации" oninput="calculateSum_gost_34()" />
+                </summary>
+
+                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
+                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  Схема расположения оборудования в стойках
+                  <label for="float-input"> || Трудозатраты, дней:</label>
+                  <input type="number" step="0.1" id="Схема расположения оборудования в стойках" name="Схема расположения оборудования в стойках" oninput="calculateSum_gost_34()" />
+                </summary>
+
+                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
+                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  Схема расположения оборудования и кабельных трасс в помещении
+                  <label for="float-input"> || Трудозатраты, дней:</label>
+                  <input type="number" step="0.1" id="Схема расположения оборудования и кабельных трасс в помещении" name="Схема расположения оборудования и кабельных трасс в помещении" oninput="calculateSum_gost_34()" />
+                </summary>
+
+                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
+                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  Таблица кабельных соединений
+                  <label for="float-input"> || Трудозатраты, дней:</label>
+                  <input type="number" step="0.1" id="Таблица кабельных соединений" name="Таблица кабельных соединений" oninput="calculateSum_gost_34()" />
+                </summary>
+
+                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
+                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  Схемы адресации
+                  <label for="float-input"> || Трудозатраты, дней:</label>
+                  <input type="number" step="0.1" id="Схемы адресации" name="Схемы адресации" oninput="calculateSum_gost_34()" />
+                </summary>
+
+                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
+                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  Отчет по моделированию радиопокрытия беспроводной сети
+                  <label for="float-input"> || Трудозатраты, дней:</label>
+                  <input type="number" step="0.1" id="Отчет по моделированию радиопокрытия беспроводной сети" name="Отчет по моделированию радиопокрытия беспроводной сети" oninput="calculateSum_gost_34()" />
+                </summary>
+
+                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
+                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  Схема крепления беспроводных точек доступа
+                  <label for="float-input"> || Трудозатраты, дней:</label>
+                  <input type="number" step="0.1" id="Схема крепления беспроводных точек доступа" name="Схема крепления беспроводных точек доступа" oninput="calculateSum_gost_34()" />
+                </summary>
+
+              </li>
+
+
+            <li>
+
+              <details>
+                <summary style="margin-left:60px; font-weight:normal; cursor: pointer;">
+                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  Разработка Эксплуатационной документации в составе:
+                  <label for="float-input"> || Трудозатраты, дней:</label>
+                  <input type="number" step="0.1" id="Разработка Эксплуатационной документации в составе:" name="Разработка Эксплуатационной документации в составе:" oninput="calculateSum_gost_34()" />
+                </summary>
+
+                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
+                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  Описание настроек
+                  <label for="float-input"> || Трудозатраты, дней:</label>
+                  <input type="number" step="0.1" id="Описание настроек" name="Описание настроек" oninput="calculateSum_gost_34()" />
+                </summary>
+
+                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
+                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  Руководство администратора
+                  <label for="float-input"> || Трудозатраты, дней:</label>
+                  <input type="number" step="0.1" id="Руководство администратора" name="Руководство администратора" oninput="calculateSum_gost_34()" />
+                </summary>
+            </li>
+        </ul>
+        <li>
+          <summary style="margin-left:60px; font-weight:normal; cursor: pointer;">
+            <input style="margin-right:20px;" id="html" type="checkbox">
+            Разработка Программы и методики испытаний
+            <label for="float-input"> || Трудозатраты, дней:</label>
+            <input type="number" step="0.1" id="Разработка Программы и методики испытаний" name="Разработка Программы и методики испытаний" oninput="calculateSum_gost_34()" />
+          </summary>
       </li>
-  {% endfor %}
-  </ul>
-  
+      <li>
+          <summary style="margin-left:60px; font-weight:normal; cursor: pointer;">
+            <input style="margin-right:20px;" id="html" type="checkbox">
+            Разработка Плана производства работ
+            <label for="float-input"> || Трудозатраты, дней:</label>
+            <input type="number" step="0.1" id="Разработка Плана производства работ" name="Разработка Плана производства работ" oninput="calculateSum_gost_34()" />
+          </summary>
+      </li>
+
+      </details>
+
+
+      <script>
+
+          function calculateSum() {
+            // Получаем значения полей input
+            var value1 = Number(document.getElementById('Обследование сетевой инфраструктуры Заказчика').value);
+            var value2 = Number(document.getElementById('Разработка Технического задания').value);
+            var value3 = Number(document.getElementById('Разработка Эскизного проекта').value);
+            var value4 = Number(document.getElementById('Разработка Концепции').value);
+            
+            // Вычисляем сумму значений
+            var sum = value1 + value2 + value3 + value4;
+            
+            // Выводим результат в поле input с id="Проектно-изыскательские работы (Предпроектная стадия)"
+            document.getElementById('Проектно-изыскательские работы (Предпроектная стадия)').value = sum;
+          }
+
+        function calculateSum_gost_34() {
+          // Получаем значения полей input
+          var value11 = Number(document.getElementById('Разработка Технорабочего проекта в составе:').value);
+          var value12 = Number(document.getElementById('Пояснительная записка').value);
+          var value13 = Number(document.getElementById('Спецификация оборудования ').value);
+          var value14 = Number(document.getElementById('Общая схема решения').value);
+          var value15 = Number(document.getElementById('Физическая схема организации связи (L1)').value);
+          var value16 = Number(document.getElementById('Физическая схема организации связи (L2)').value);
+          var value17 = Number(document.getElementById('Физическая схема организации связи (L3)').value);
+          var value18 = Number(document.getElementById('Схема маршрутизации').value);
+          var value19 = Number(document.getElementById('Схема расположения оборудования в стойках').value);
+          var value110 = Number(document.getElementById('Схема расположения оборудования и кабельных трасс в помещении').value);
+          var value111 = Number(document.getElementById('Таблица кабельных соединений').value);
+          var value112 = Number(document.getElementById('Схемы адресации').value);
+          var value113 = Number(document.getElementById('Отчет по моделированию радиопокрытия беспроводной сети').value);
+          var value114 = Number(document.getElementById('Схема крепления беспроводных точек доступа').value);
+          var value115 = Number(document.getElementById('Разработка Программы и методики испытаний').value);
+          var value116 = Number(document.getElementById('Разработка Плана производства работ').value);
+          var value117 = Number(document.getElementById('Разработка Эксплуатационной документации в составе:').value);
+          var value118 = Number(document.getElementById('Описание настроек').value);
+          var value119 = Number(document.getElementById('Руководство администратора').value);
+          // Вычисляем сумму значений
+          var sum_gost_34 = value11 + value12 + value13 + value14 + value15 + value16 + value17 + value18 + value19 + value110 + value111 + value112 + value113 + value114 + value115 + value116 + value117 + value118 + value119;
+          
+          // Выводим результат в поле input с id="Проектно-изыскательские работы (Предпроектная стадия)"
+          document.getElementById('Проектно-изыскательские работы').value = sum_gost_34;
+        }
+      </script>
+
+
+
+    {% endfor %}
+    
+    <input type="submit" value="Добавить в Расчет">
+  </form>
     {% endblock %} 
-
-
-

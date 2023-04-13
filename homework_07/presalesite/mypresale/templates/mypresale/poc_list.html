@@ -1,4 +1,4 @@
-{% extends 'mypresale/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
@@ -13,36 +13,18 @@
           <!-- </p> -->
         </div>
       </div>
-    </section>
 
-  {% for item in object_list %} 
-  <div class="album py-5 bg-body-tertiary">
-    <div class="container">
+      <details>
+        <summary>Нажмите, чтобы развернуть список</summary>
+        <ul>
+          <li>Пункт 1</li>
+          <li>Пункт 2</li>
+          <li>Пункт 3</li>
+        </ul>
+      </details>
+
       
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
-            <div class="card-body">
-              <p class="card-text">{{item.title}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-
-                    <form action="/news/news-detail/{{item.id}}/">
-                      <button class="btn btn-primary">Просмотр</button>
-                     </form>
-
-
-                  <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Просмотр</button> -->
-                  <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
-                </div>
-                <small class="text-body-secondary">{{item.time_update|date:"d-m-Y H:i:s"}}</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-{% endfor %}
+    </section>
 
   
     {% endblock %}
