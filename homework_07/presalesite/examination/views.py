@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from .models import *
 from .forms import *
 
@@ -9,34 +11,32 @@ from .forms import *
 class CategoryListView(ListView):
     model = Category
     form_class = ExaminationForm
-
     def post(self, request, *args, **kwargs):
-        # получаем данные из POST-запроса
         if request.method == 'POST':
             data = request.POST
-            #print(dict(data))
-            data = {k: v for k, v in data.items() if v is not None and v != ""}
-            data.pop("csrfmiddlewaretoken")
-            print(data)
-            print('='*50)
-            # cat = Category(name = 'NTCNN')
-            # cat.save()
-            print('*'*50)
+            data = {k: v for k, v in data.items() if v is not None and v != ""}            # удаляем лишние поля из словаря
+            data.pop("csrfmiddlewaretoken")                                                # удаляем лишние поля из словаря
+            data = {key: value for key, value in data.items() if key != value}             # удаляем лишние поля из словаря
+            checked = data['checked_items'].split(',')                                     # разделяем checked_items и создаем список из его значений
+            data.pop("checked_items")                                                      # удаляем checked_items из словаря
+            for item in checked:                                                           # значениям на против которые стоят галочки ставим значение клоичества дней Null
+                data[item] = None
+            for n in data.items():                                                         # добавляем записи в БД
+                name = n[0]
+                days = n[1]
+                if days:
+                    cat = Category(name = name, days = days)
+                    cat.save()
+                else:
+                    cat = Category(name = name)
+                    cat.save()   
             return render(request, 'examination/success_add.html')
 
         
 
-# def my_view(request):
-#     if request.method == 'POST':
-#         # проверяем, была ли установлена галочка
-#         if request.POST.get('html') == 'on':
-#             # галочка была установлена
-#         else:
-#             # галочка не была установлена
-
-#         # обработка полученных данных...
-
-#     return render(request, 'my_template.html')
+def delete(request):
+    Category.objects.all().delete()
+    return redirect(reverse_lazy('Category'))
 
 
 # def my_view(request):
@@ -61,37 +61,37 @@ class CategoryListView(ListView):
 
 
 
-class SubcategoryListView(ListView):
-    model = Subcategory
-    form_class = ExaminationForm
+# class SubcategoryListView(ListView):
+#     model = Subcategory
+#     form_class = ExaminationForm
     
-    def get(self, request, *args, **kwargs):
-        self.subcategory_id = kwargs['pk_cat']
-        return super().get(request,*args, **kwargs)
+#     def get(self, request, *args, **kwargs):
+#         self.subcategory_id = kwargs['pk_cat']
+#         return super().get(request,*args, **kwargs)
 
-    def get_queryset(self):
-        return Subcategory.objects.filter(cat_subcategory_id = self.subcategory_id)
+#     def get_queryset(self):
+#         return Subcategory.objects.filter(cat_subcategory_id = self.subcategory_id)
 
 
-class ProductListView(ListView):
-    model = Product
-    form_class = ExaminationForm
+# class ProductListView(ListView):
+#     model = Product
+#     form_class = ExaminationForm
 
-    def get(self, request, *args, **kwargs):
-        self.subcategory_id = kwargs['pk_product']
-        return super().get(request,*args, **kwargs)
+#     def get(self, request, *args, **kwargs):
+#         self.subcategory_id = kwargs['pk_product']
+#         return super().get(request,*args, **kwargs)
 
-    def get_queryset(self):
-        return Product.objects.filter(subcat_product_id = self.subcategory_id)
+#     def get_queryset(self):
+#         return Product.objects.filter(subcat_product_id = self.subcategory_id)
     
 
-class SubproductListView(ListView):
-    model = Subproduct
-    form_class = ExaminationForm
+# class SubproductListView(ListView):
+#     model = Subproduct
+#     form_class = ExaminationForm
 
-    def get(self, request, *args, **kwargs):
-        self.category_id = kwargs['pk_sub_product']
-        return super().get(request,*args, **kwargs)
+#     def get(self, request, *args, **kwargs):
+#         self.category_id = kwargs['pk_sub_product']
+#         return super().get(request,*args, **kwargs)
 
-    def get_queryset(self):
-        return Subproduct.objects.filter(prod_subproduct_id = self.category_id).order_by('id')
+#     def get_queryset(self):
+#         return Subproduct.objects.filter(prod_subproduct_id = self.category_id).order_by('id')

@@ -45,7 +45,6 @@
 
     <h5 style="margin-left:20px; font-weight: bold; cursor: pointer;" >Обследование СПД</h5>
 
-    <!-- {% for item in object_list %} -->
     <form method="POST">
       {% csrf_token %}
 
@@ -252,10 +251,10 @@
         }
     </script>
 
-    <!-- {% endfor %} -->
-    
-    <!-- <input type="submit" value="Добавить в Расчет"> -->
     <input type="hidden" id="checked-items" name="checked_items">
     <button type="submit" onclick="submitForm()" class="btn btn-primary">Добавить в Расчет</button>
+  </div>
+  <a style="margin-left:20px;" class="btn btn-danger" href='delete'>Очистить</a>
+  </div>
   </form>
     {% endblock %} 
