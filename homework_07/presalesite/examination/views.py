@@ -14,11 +14,17 @@ class CategoryListView(ListView):
         # получаем данные из POST-запроса
         if request.method == 'POST':
             data = request.POST
-            print(dict(data))
+            #print(dict(data))
             data = {k: v for k, v in data.items() if v is not None and v != ""}
             data.pop("csrfmiddlewaretoken")
             print(data)
+            print('='*50)
+            # cat = Category(name = 'NTCNN')
+            # cat.save()
+            print('*'*50)
+            return render(request, 'examination/success_add.html')
 
+        
 
 # def my_view(request):
 #     if request.method == 'POST':
