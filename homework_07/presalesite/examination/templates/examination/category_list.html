@@ -7,6 +7,7 @@
     border-radius: 5px;
     margin: 10px 0;
     padding: 5px;
+    background-color: rgb(228, 228, 221);
   }
 
   summary {
@@ -27,7 +28,7 @@
   }
 
   input[type="number"] {
-    width: 60px;
+    width: 3%;
   }
 
   input[type=submit] {
@@ -39,6 +40,10 @@
     text-decoration: none;
     margin: 4px 2px;
     cursor: pointer;
+  }
+
+  details:open {
+    background-color: rgb(214, 214, 27);
   }
 
 </style>
@@ -59,7 +64,7 @@
               Проектно-изыскательские работы (Предпроектная стадия)
               <label for="float-input" style="margin-left:60px;">Трудозатраты, дней:</label>
               <input type="number" step="0.1" id="Проектно-изыскательские работы (Предпроектная стадия)" name="Проектно-изыскательские работы (Предпроектная стадия)" />
-            </summary> 
+           </summary> 
             <ul>
               <li>
                   <summary style="margin-left:60px; font-weight:normal; cursor: pointer;">
@@ -93,149 +98,113 @@
 
         <li>
           <details>
-          <summary style="margin-left:40px; font-weight:normal; cursor: pointer;">
-            Проектно-изыскательские работы (Проектная стадия) (ГОСТ 34)
-            <label for="float-input"> || Общие Трудозатраты, дней:</label>
-            <input type="number" step="0.1" id="Проектно-изыскательские работы" name="Проектно-изыскательские работы" readonly />
-          </summary> 
+
+            <summary style="margin-left:40px; font-weight:normal; cursor: pointer;">
+              Проектно-изыскательские работы (Проектная стадия) (ГОСТ 34)
+              <label for="float-input" style="margin-left:60px;">Трудозатраты, дней:</label>
+              <input type="number" step="0.1" id="Проектно-изыскательские работы (Проектная стадия) (ГОСТ 34)" name="Проектно-изыскательские работы (Проектная стадия) (ГОСТ 34)" />
+            </summary> 
+
           <ul>
             <li>
               <details>
                 <summary style="margin-left:60px; font-weight:normal; cursor: pointer;">
-                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  <input type="checkbox" style="margin-left:20px;" style="margin-right:10px;" class="list-item-checkbox" name="Разработка Технорабочего проекта в составе:" value="Разработка Технорабочего проекта в составе:">
                   Разработка Технорабочего проекта в составе:
-                  <label for="float-input"> || Трудозатраты, дней:</label>
-                  <input type="number" step="0.1" id="Разработка Технорабочего проекта в составе:" name="Разработка Технорабочего проекта в составе:" oninput="calculateSum_gost_34()" />
                 </summary>
 
-                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
-                  <input style="margin-right:20px; margin-top:20px; margin-bottom:20px;" id="html" type="checkbox">
+                <summary style="margin-left:120px; font-weight:normal; cursor: pointer;">
+                  <input type="checkbox" style="margin-right:20px;" class="list-item-checkbox" name="Пояснительная записка" value="Пояснительная записка">
                   Пояснительная записка
-                  <label for="float-input"> || Трудозатраты, дней:</label>
-                  <input type="number" step="0.1" id="Пояснительная записка" name="Пояснительная записка" oninput="calculateSum_gost_34()" />
                 </summary>
 
-                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
-                  <input style="margin-right:20px;" id="html" type="checkbox">
-                  Спецификация оборудования 
-                  <label for="float-input"> || Трудозатраты, дней:</label>
-                  <input type="number" step="0.1" id="Спецификация оборудования" name="Спецификация оборудования " oninput="calculateSum_gost_34()" />
+                <summary style="margin-left:120px; font-weight:normal; cursor: pointer;">
+                  <input type="checkbox" style="margin-right:20px;" class="list-item-checkbox" name="Спецификация оборудования" value="Спецификация оборудования">
+                  Спецификация оборудования
                 </summary>
 
-                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
-                  <input style="margin-right:20px;" id="html" type="checkbox">
+                <summary style="margin-left:120px; font-weight:normal; cursor: pointer;">
+                  <input type="checkbox" style="margin-right:20px;" class="list-item-checkbox" name="Физическая схема организации связи (L1)" value="Физическая схема организации связи (L1)">
                   Физическая схема организации связи (L1)
-                  <label for="float-input"> || Трудозатраты, дней:</label>
-                  <input type="number" step="0.1" id="Физическая схема организации связи (L1)" name="Физическая схема организации связи (L1)" oninput="calculateSum_gost_34()" />
                 </summary>
 
-                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
-                  <input style="margin-right:20px;" id="html" type="checkbox">
-                  Логическая схема организации связи (L2)
-                  <label for="float-input"> || Трудозатраты, дней:</label>
-                  <input type="number" step="0.1" id="Логическая схема организации связи (L2)" name="Логическая схема организации связи (L2)" oninput="calculateSum_gost_34()" />
+                <summary style="margin-left:120px; font-weight:normal; cursor: pointer;">
+                  <input type="checkbox" style="margin-right:20px;" class="list-item-checkbox" name="Физическая схема организации связи (L2)" value="Физическая схема организации связи (L2)">
+                  Физическая схема организации связи (L2)
                 </summary>
 
-                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
-                  <input style="margin-right:20px;" id="html" type="checkbox">
-                  Логическая схема организации связи (L3)
-                  <label for="float-input"> || Трудозатраты, дней:</label>
-                  <input type="number" step="0.1" id="Логическая схема организации связи (L3)" name="Логическая схема организации связи (L3)" oninput="calculateSum_gost_34()" />
+                <summary style="margin-left:120px; font-weight:normal; cursor: pointer;">
+                  <input type="checkbox" style="margin-right:20px;" class="list-item-checkbox" name="Физическая схема организации связи (L3)" value="Физическая схема организации связи (L3)">
+                  Физическая схема организации связи (L3)
                 </summary>
 
-                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
-                  <input style="margin-right:20px;" id="html" type="checkbox">
+                <summary style="margin-left:120px; font-weight:normal; cursor: pointer;">
+                  <input type="checkbox" style="margin-right:20px;" class="list-item-checkbox" name="Схема маршрутизации" value="Схема маршрутизации">
                   Схема маршрутизации
-                  <label for="float-input"> || Трудозатраты, дней:</label>
-                  <input type="number" step="0.1" id="Схема маршрутизации" name="Схема маршрутизации" oninput="calculateSum_gost_34()" />
                 </summary>
 
-                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
-                  <input style="margin-right:20px;" id="html" type="checkbox">
+                <summary style="margin-left:120px; font-weight:normal; cursor: pointer;">
+                  <input type="checkbox" style="margin-right:20px;" class="list-item-checkbox" name="Схема расположения оборудования в стойках" value="Схема расположения оборудования в стойках">
                   Схема расположения оборудования в стойках
-                  <label for="float-input"> || Трудозатраты, дней:</label>
-                  <input type="number" step="0.1" id="Схема расположения оборудования в стойках" name="Схема расположения оборудования в стойках" oninput="calculateSum_gost_34()" />
                 </summary>
 
-                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
-                  <input style="margin-right:20px;" id="html" type="checkbox">
+                <summary style="margin-left:120px; font-weight:normal; cursor: pointer;">
+                  <input type="checkbox" style="margin-right:20px;" class="list-item-checkbox" name="Схема расположения оборудования и кабельных трасс в помещении" value="Схема расположения оборудования и кабельных трасс в помещении">
                   Схема расположения оборудования и кабельных трасс в помещении
-                  <label for="float-input"> || Трудозатраты, дней:</label>
-                  <input type="number" step="0.1" id="Схема расположения оборудования и кабельных трасс в помещении" name="Схема расположения оборудования и кабельных трасс в помещении" oninput="calculateSum_gost_34()" />
                 </summary>
 
-                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
-                  <input style="margin-right:20px;" id="html" type="checkbox">
+                <summary style="margin-left:120px; font-weight:normal; cursor: pointer;">
+                  <input type="checkbox" style="margin-right:20px;" class="list-item-checkbox" name="Таблица кабельных соединений" value="Таблица кабельных соединений">
                   Таблица кабельных соединений
-                  <label for="float-input"> || Трудозатраты, дней:</label>
-                  <input type="number" step="0.1" id="Таблица кабельных соединений" name="Таблица кабельных соединений" oninput="calculateSum_gost_34()" />
                 </summary>
 
-                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
-                  <input style="margin-right:20px;" id="html" type="checkbox">
+                <summary style="margin-left:120px; font-weight:normal; cursor: pointer;">
+                  <input type="checkbox" style="margin-right:20px;" class="list-item-checkbox" name="Схемы адресации" value="Схемы адресации">
                   Схемы адресации
-                  <label for="float-input"> || Трудозатраты, дней:</label>
-                  <input type="number" step="0.1" id="Схемы адресации" name="Схемы адресации" oninput="calculateSum_gost_34()" />
                 </summary>
 
-                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
-                  <input style="margin-right:20px;" id="html" type="checkbox">
+                <summary style="margin-left:120px; font-weight:normal; cursor: pointer;">
+                  <input type="checkbox" style="margin-right:20px;" class="list-item-checkbox" name="Отчет по моделированию радиопокрытия беспроводной сети" value="Отчет по моделированию радиопокрытия беспроводной сети">
                   Отчет по моделированию радиопокрытия беспроводной сети
-                  <label for="float-input"> || Трудозатраты, дней:</label>
-                  <input type="number" step="0.1" id="Отчет по моделированию радиопокрытия беспроводной сети" name="Отчет по моделированию радиопокрытия беспроводной сети" oninput="calculateSum_gost_34()" />
                 </summary>
 
-                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
-                  <input style="margin-right:20px;" id="html" type="checkbox">
+                <summary style="margin-left:120px; font-weight:normal; cursor: pointer;">
+                  <input type="checkbox" style="margin-right:20px;" class="list-item-checkbox" name="Схема крепления беспроводных точек доступа" value="Схема крепления беспроводных точек доступа">
                   Схема крепления беспроводных точек доступа
-                  <label for="float-input"> || Трудозатраты, дней:</label>
-                  <input type="number" step="0.1" id="Схема крепления беспроводных точек доступа" name="Схема крепления беспроводных точек доступа" oninput="calculateSum_gost_34()" />
                 </summary>
-
               </li>
 
-
             <li>
-
               <details>
                 <summary style="margin-left:60px; font-weight:normal; cursor: pointer;">
-                  <input style="margin-right:20px;" id="html" type="checkbox">
+                  <input type="checkbox" style="margin-left:20px;" style="margin-right:10px;" class="list-item-checkbox" name="Разработка Эксплуатационной документации в составе:" value="Разработка Эксплуатационной документации в составе:">
                   Разработка Эксплуатационной документации в составе:
-                  <label for="float-input"> || Трудозатраты, дней:</label>
-                  <input type="number" step="0.1" id="Разработка Эксплуатационной документации в составе:" name="Разработка Эксплуатационной документации в составе:" oninput="calculateSum_gost_34()" />
                 </summary>
 
-                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
-                  <input style="margin-right:20px;" id="html" type="checkbox">
+                <summary style="margin-left:120px; font-weight:normal; cursor: pointer;">
+                  <input type="checkbox" style="margin-right:20px;" class="list-item-checkbox" name="Описание настроек" value="Описание настроек">
                   Описание настроек
-                  <label for="float-input"> || Трудозатраты, дней:</label>
-                  <input type="number" step="0.1" id="Описание настроек" name="Описание настроек" oninput="calculateSum_gost_34()" />
                 </summary>
 
-                <summary style="margin-left:100px; font-weight:normal; cursor: pointer;">
-                  <input style="margin-right:20px;" id="html" type="checkbox">
+                <summary style="margin-left:120px; font-weight:normal; cursor: pointer;">
+                  <input type="checkbox" style="margin-right:20px;" class="list-item-checkbox" name="Руководство администратора" value="Руководство администратора">
                   Руководство администратора
-                  <label for="float-input"> || Трудозатраты, дней:</label>
-                  <input type="number" step="0.1" id="Руководство администратора" name="Руководство администратора" oninput="calculateSum_gost_34()" />
                 </summary>
             </li>
+            
         </ul>
         <li>
-          <summary style="margin-left:60px; font-weight:normal; cursor: pointer;">
-            <input style="margin-right:20px;" id="html" type="checkbox">
+          <summary style="margin-left:83px; font-weight:normal; cursor: pointer;">
+            <input type="checkbox" style="margin-left:20px;" style="margin-right:10px;" class="list-item-checkbox" name="Разработка Программы и методики испытаний" value="Разработка Программы и методики испытаний">
             Разработка Программы и методики испытаний
-            <label for="float-input"> || Трудозатраты, дней:</label>
-            <input type="number" step="0.1" id="Разработка Программы и методики испытаний" name="Разработка Программы и методики испытаний" oninput="calculateSum_gost_34()" />
           </summary>
-      </li>
-      <li>
-          <summary style="margin-left:60px; font-weight:normal; cursor: pointer;">
-            <input style="margin-right:20px;" id="html" type="checkbox">
+        </li>
+        <li>
+          <summary style="margin-left:83px; font-weight:normal; cursor: pointer;">
+            <input type="checkbox" style="margin-left:20px;" style="margin-right:10px;" class="list-item-checkbox" name="Разработка Плана производства работ" value="Разработка Плана производства работ">
             Разработка Плана производства работ
-            <label for="float-input"> || Трудозатраты, дней:</label>
-            <input type="number" step="0.1" id="Разработка Плана производства работ" name="Разработка Плана производства работ" oninput="calculateSum_gost_34()" />
           </summary>
-      </li>
+        </li>
 
       </details>
 
@@ -252,9 +221,13 @@
     </script>
 
     <input type="hidden" id="checked-items" name="checked_items">
-    <button type="submit" onclick="submitForm()" class="btn btn-primary">Добавить в Расчет</button>
+    <button style="margin-left:50px;" type="submit" onclick="submitForm()" class="btn btn-primary">Добавить в Расчет</button>
   </div>
   <a style="margin-left:20px;" class="btn btn-danger" href='delete'>Очистить</a>
   </div>
   </form>
+
     {% endblock %} 
+
+
+    
