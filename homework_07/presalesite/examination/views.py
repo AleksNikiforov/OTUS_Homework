@@ -8,8 +8,8 @@ from .forms import *
 
 
 
-class CategoryListView(ListView):
-    model = Category
+class ExaminationListView(ListView):
+    model = Examination
     form_class = ExaminationForm
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
@@ -25,17 +25,17 @@ class CategoryListView(ListView):
                 name = n[0]
                 days = n[1]
                 if days:
-                    cat = Category(name = name, days = days)
+                    cat = Examination(name = name, days = days)
                     cat.save()
                 else:
-                    cat = Category(name = name)
+                    cat = Examination(name = name)
                     cat.save()   
             return render(request, 'examination/success_add.html')
 
         
 
 def delete(request):
-    Category.objects.all().delete()
+    Examination.objects.all().delete()
     return redirect(reverse_lazy('Category'))
 
 

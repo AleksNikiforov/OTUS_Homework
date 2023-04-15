@@ -2,7 +2,7 @@ from django.db import models
 
 
 
-class Category(models.Model):
+class Examination(models.Model):
     name = models.CharField(max_length=200)
     days = models.FloatField(null=True)
     

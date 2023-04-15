@@ -1,8 +1,8 @@
 from django.urls import path, re_path
 import re
-from .views import CategoryListView, delete
+from .views import ExaminationListView, delete
 
 urlpatterns = [
-    path('', CategoryListView.as_view(), name='Category'),
+    path('', ExaminationListView.as_view(), name='Examination'),
     path('delete/', delete),
 ]
