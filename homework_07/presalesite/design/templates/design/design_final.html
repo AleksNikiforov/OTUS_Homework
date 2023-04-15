@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <h5 style="margin-left:20px; font-weight: bold; cursor: pointer;" >В расчет добавлены следующие записи:</h5>
+
+    <body>
+        <ol>
+            {% for data in perechen %}
+                <li>
+                    {{data.name}} | {{data.days|default:""}} дней
+                </li>
+            {% endfor %}
+        </ol>
+    </body>
+
+    <h5 style="margin-left:20px; font-weight: bold; cursor: pointer;" >Если передумал, данные можно стереть</h5>
+
+</div>
+<a style="margin-top:20px; margin-left:20px;" class="btn btn-danger" href='delete'>Стереть</a>
+</div>
+
+
+    {% endblock %} 

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from .models import *
@@ -30,9 +30,13 @@ class DesignListView(ListView):
                 else:
                     cat = Design(name = name)
                     cat.save()   
-            return render(request, 'design/success_add.html')
+            return redirect(reverse_lazy('Final'))
 
-        
+
+def final_list(request):
+    perechen = Design.objects.all()
+    return render(request, 'design/design_final.html', {'perechen': perechen})
+
 
 def delete(request):
     Design.objects.all().delete()
