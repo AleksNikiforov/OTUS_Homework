@@ -36,4 +36,4 @@ class DesignListView(ListView):
 
 def delete(request):
     Design.objects.all().delete()
-    return redirect(reverse_lazy('Category'))
+    return redirect(reverse_lazy('Design'))

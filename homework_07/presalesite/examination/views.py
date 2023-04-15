@@ -36,7 +36,7 @@ class ExaminationListView(ListView):
 
 def delete(request):
     Examination.objects.all().delete()
-    return redirect(reverse_lazy('Category'))
+    return redirect(reverse_lazy('Examination'))
 
 
 # def my_view(request):
