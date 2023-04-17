@@ -30,7 +30,7 @@ class DesignListView(ListView):
                 else:
                     cat = Design(name = name)
                     cat.save()   
-            return redirect(reverse_lazy('Final'))
+            return redirect(reverse_lazy('Final_Design'))
 
 
 def final_list(request):

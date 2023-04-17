@@ -4,7 +4,7 @@ from .views import DesignListView, delete, final_list
 
 urlpatterns = [
     path('', DesignListView.as_view(), name='Design'),
-    path('final/', final_list, name='Final'),
+    path('final/', final_list, name='Final_Design'),
     path('final/delete/', delete),
     path('delete/', delete),
 ]

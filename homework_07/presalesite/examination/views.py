@@ -30,68 +30,17 @@ class ExaminationListView(ListView):
                 else:
                     cat = Examination(name = name)
                     cat.save()   
-            return render(request, 'examination/success_add.html')
+            return redirect(reverse_lazy('Final_Examination'))
 
-        
+
+def final_list(request):
+    perechen = Examination.objects.all()
+    print(perechen)
+    print('='*50)
+    return render(request, 'examination/examination_final.html', {'perechen': perechen})
+
 
 def delete(request):
     Examination.objects.all().delete()
     return redirect(reverse_lazy('Examination'))
 
-
-# def my_view(request):
-#     if request.method == 'POST':
-#         # получаем значение, введенное пользователем
-#         input_value = request.POST.get('float-input')
-
-#         # получаем текст, содержащийся в элементе <label>
-#         label_text = 'Трудозатраты, дней:'
-
-#         # обработка полученных данных...
-
-#     return render(request, 'my_template.html')
-
-
-# def my_view(request):
-#     summary_text = request.POST.get('summary_text')
-
-#     # обработка полученных данных...
-
-#     return render(request, 'my_template.html')
-
-
-
-# class SubcategoryListView(ListView):
-#     model = Subcategory
-#     form_class = ExaminationForm
-    
-#     def get(self, request, *args, **kwargs):
-#         self.subcategory_id = kwargs['pk_cat']
-#         return super().get(request,*args, **kwargs)
-
-#     def get_queryset(self):
-#         return Subcategory.objects.filter(cat_subcategory_id = self.subcategory_id)
-
-
-# class ProductListView(ListView):
-#     model = Product
-#     form_class = ExaminationForm
-
-#     def get(self, request, *args, **kwargs):
-#         self.subcategory_id = kwargs['pk_product']
-#         return super().get(request,*args, **kwargs)
-
-#     def get_queryset(self):
-#         return Product.objects.filter(subcat_product_id = self.subcategory_id)
-    
-
-# class SubproductListView(ListView):
-#     model = Subproduct
-#     form_class = ExaminationForm
-
-#     def get(self, request, *args, **kwargs):
-#         self.category_id = kwargs['pk_sub_product']
-#         return super().get(request,*args, **kwargs)
-
-#     def get_queryset(self):
-#         return Subproduct.objects.filter(prod_subproduct_id = self.category_id).order_by('id')
