@@ -30,7 +30,7 @@ ul {
 
 li {
   margin: 5px 0;
-  color: blue;
+  color: rgb(0, 0, 0);
 }
 
 input[type="number"] {
