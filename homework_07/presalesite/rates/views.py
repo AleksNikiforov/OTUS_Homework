@@ -14,23 +14,52 @@ class RatesListView(ListView):
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
             data = request.POST
-            data = {k: v for k, v in data.items() if v is not None and v != ""}            # удаляем лишние поля из словаря
-            data.pop("csrfmiddlewaretoken")                                                # удаляем лишние поля из словаря
-            data = {key: value for key, value in data.items() if key != value}             # удаляем лишние поля из словаря
-            checked = data['checked_items'].split(',')                                     # разделяем checked_items и создаем список из его значений
-            data.pop("checked_items")                                                      # удаляем checked_items из словаря
-            for item in checked:                                                           # значениям на против которые стоят галочки ставим значение клоичества дней Null
-                data[item] = None
-            for n in data.items():                                                         # добавляем записи в БД
-                name = n[0]
-                days = n[1]
-                if days:
-                    cat = Rates(name = name, days = days)
-                    cat.save()
-                else:
-                    cat = Rates(name = name)
-                    cat.save()   
-            return redirect(reverse_lazy('Final_Rates'))
+            data = dict(data)
+            data.pop("csrfmiddlewaretoken")  
+            print(data)
+            person = data['checked_items'][0]
+            print('5'*50)
+            print(person)
+
+            ''' Если отмечаем Архитектор то получается ключ со значением Архитектор и стоимостью, аналогично для Инженера
+            {'Архитектор': ['Архитектор', '25400.00'],
+              'Инженер': ['20400.00'],
+              'Менеджер проекта': ['20400.00'],
+              'Разработчик технической документации': ['16400.00'],
+              'Менеджер проекта коэффициент': ['0.3'],
+              'Разработчик технической документации коэффициент': ['0.3'],
+              'checked_items': ['Архитектор']}
+              Поэтому нужно делать проверку и вставлять соответствующее значение
+              '''
+
+            default_num_engineer = 0
+            default_num_architect = 0
+            if person == 'Архитектор':
+                default_num_architect = -1
+            if person == 'Инженер':
+                default_num_engineer = -1
+
+            Rates.objects.all().delete()
+            
+            cat = Rates(person = person,
+                        engineer_cost = data['Инженер'][default_num_engineer], 
+                        architect_cost = data['Архитектор'][default_num_architect], 
+                        manager_cost = data['Менеджер проекта'][0],
+                        tech_writer_cost = data['Разработчик технической документации'][0],
+                        manager_coef = data['Менеджер проекта коэффициент'][0],
+                        tech_writer_coef = data['Разработчик технической документации коэффициент'][0])
+            cat.save()
+
+            # for n in data.items():                                                         # добавляем записи в БД
+            #     name = n[0]
+            #     days = n[1]
+            #     if days:
+            #         cat = Rates(name = name, days = days)
+            #         cat.save()
+            #     else:
+            #         cat = Rates(name = name)
+            #         cat.save()   
+            # return redirect(reverse_lazy('Final_Rates'))
 
 
 def final_list(request):
