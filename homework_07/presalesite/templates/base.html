@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<!-- <link rel="shortcut icon" href="{% static 'esoterics/images/icon.jpg' %}" type="image/x-icon"/> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,50 +18,50 @@
 			<ul class="nav nav-pills nav-fill">
 			<!--<ul class="nav flex-column"> --- gorizontal navbar --- -->
 				<li class="nav-item">
-					<a class="nav-item nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
+					<a class="nav-item nav-link" href="{% url 'Home' %}">Home</a>
 				  </li>
-				  <li class="nav-item">
-					<a class="nav-item nav-link" href="{% url 'about' %}">About</a>
-				  </li>
+				  <!-- <li class="nav-item">
+					<a class="nav-item nav-link" href="">About</a>
+				  </li> -->
 				  <li class="nav-item">
 					<a class="nav-item nav-link" href="{% url 'Design' %}">Design</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-item nav-link" href="{% url 'Exam' %}">Examination</a>
+					<a class="nav-item nav-link" href="{% url 'Examination' %}">Examination</a>
+				  </li>
+				  <!-- <li class="nav-item">
+					<a class="nav-item nav-link" href="">PoC</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-item nav-link" href="{% url 'Poc' %}">PoC</a>
+					<a class="nav-item nav-link" href="">Install</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-item nav-link" href="{% url 'Install' %}">Install</a>
+					<a class="nav-item nav-link" href="">Comissioning</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-item nav-link" href="{% url 'Comissioning' %}">Comissioning</a>
+					<a class="nav-item nav-link" href="">Accept</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-item nav-link" href="{% url 'Accept' %}">Accept</a>
+					<a class="nav-item nav-link" href="">Migration</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-item nav-link" href="{% url 'Migration' %}">Migration</a>
+					<a class="nav-item nav-link" href="">Other Jobs</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-item nav-link" href="{% url 'Other_jobs' %}">Other Jobs</a>
+					<a class="nav-item nav-link" href="">Subcontractor</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-item nav-link" aria-current="page" href="{% url 'Subcontractor' %}">Subcontractor</a>
+					<a class="nav-item nav-link" href="">Other</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-item nav-link" href="{% url 'Other' %}">Other</a>
+					<a class="nav-item nav-link" href="">Unexpected</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-item nav-link" href="{% url 'Unenxpected' %}">Unexpected</a>
+					<a class="nav-item nav-link" href="">BusinessTrip</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-item nav-link" href="{% url 'Business_trip' %}">BusinessTrip</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-item nav-link" href="{% url 'Rates' %}">Rates</a>
-				  </li>
+					<a class="nav-item nav-link" href="">Rates</a>
+				  </li> -->
 			</ul>
 		  </div>
 		</div>
@@ -72,5 +72,26 @@
 	  {% block content %}
 	  {% endblock %}
 
+	  {% block final %}
+	  <h6 style="margin-left:50px; margin-top:15px;">Необходимо выбрать кто будет производить работы, инежнер или архитектор</h6>
+
+	  <summary style="margin-left:50px; font-weight:normal; cursor: pointer;">
+		<input type="checkbox" style="margin-top:5px;" class="list-item-checkbox" name="Инженер" value="Инженер">
+		Инженер
+	  </summary>
+  
+	  <summary style="margin-left:50px; font-weight:normal; cursor: pointer;">
+		<input type="checkbox" style="margin-top:5px; margin-bottom:20px;" class="list-item-checkbox" name="Архитектор" value="Архитектор">
+		Архитектор
+	  </summary>
+  
+  
+	  <input type="hidden" id="checked-items" name="checked_items">
+	  <button style="margin-left:50px;" type="submit" onclick="submitForm()" class="btn btn-primary">Добавить в Расчет</button>
+	</div>
+	<a style="margin-left:20px;" class="btn btn-danger" href='delete'>Очистить</a>
+	</div>
+	</form>
+	  {% endblock %}
 	</body>
 </html>

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from .models import *
@@ -8,9 +8,9 @@ from .forms import *
 
 
 
-class ExaminationListView(ListView):
-    model = Examination
-    form_class = ExaminationForm
+class DesignListView(ListView):
+    model = Design
+    form_class = DesignForm
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
             data = request.POST
@@ -25,22 +25,19 @@ class ExaminationListView(ListView):
                 name = n[0]
                 days = n[1]
                 if days:
-                    cat = Examination(name = name, days = days)
+                    cat = Design(name = name, days = days)
                     cat.save()
                 else:
-                    cat = Examination(name = name)
+                    cat = Design(name = name)
                     cat.save()   
-            return redirect(reverse_lazy('Final_Examination'))
+            return redirect(reverse_lazy('Final_Design'))
 
 
 def final_list(request):
-    perechen = Examination.objects.all()
-    print(perechen)
-    print('='*50)
-    return render(request, 'examination/examination_final.html', {'perechen': perechen})
+    perechen = Design.objects.all()
+    return render(request, 'design/design_final.html', {'perechen': perechen})
 
 
 def delete(request):
-    Examination.objects.all().delete()
-    return redirect(reverse_lazy('Examination'))
-
+    Design.objects.all().delete()
+    return redirect(reverse_lazy('Design'))

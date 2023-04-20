@@ -1,9 +1,10 @@
 from django.urls import path, re_path
-from .views import CategoryListView, SubcategoryListView, ProductListView, SubproductListView
+import re
+from .views import ExaminationListView, delete, final_list
 
 urlpatterns = [
-    path('', CategoryListView.as_view(), name='Exam'),
-    path('sub-category/', SubcategoryListView.as_view(), name='Sub-category'),
-    path('sub-category/product/', ProductListView.as_view(), name='Product'),
-    path('sub-category/product/sub-product/', SubproductListView.as_view(), name='Sub-product'),
+    path('', ExaminationListView.as_view(), name='Examination'),
+    path('final/', final_list, name='Final_Examination'),
+    path('final/delete/', delete),
+    path('delete/', delete),
 ]
