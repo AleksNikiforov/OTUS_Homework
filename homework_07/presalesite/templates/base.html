@@ -72,5 +72,26 @@
 	  {% block content %}
 	  {% endblock %}
 
+	  {% block final %}
+	  <h6 style="margin-left:50px; margin-top:15px;">Необходимо выбрать кто будет производить работы, инежнер или архитектор</h6>
+
+	  <summary style="margin-left:50px; font-weight:normal; cursor: pointer;">
+		<input type="checkbox" style="margin-top:5px;" class="list-item-checkbox" name="Инженер" value="Инженер">
+		Инженер
+	  </summary>
+  
+	  <summary style="margin-left:50px; font-weight:normal; cursor: pointer;">
+		<input type="checkbox" style="margin-top:5px; margin-bottom:20px;" class="list-item-checkbox" name="Архитектор" value="Архитектор">
+		Архитектор
+	  </summary>
+  
+  
+	  <input type="hidden" id="checked-items" name="checked_items">
+	  <button style="margin-left:50px;" type="submit" onclick="submitForm()" class="btn btn-primary">Добавить в Расчет</button>
+	</div>
+	<a style="margin-left:20px;" class="btn btn-danger" href='delete'>Очистить</a>
+	</div>
+	</form>
+	  {% endblock %}
 	</body>
 </html>
