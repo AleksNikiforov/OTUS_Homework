@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'presalesite',
     'design',
     'examination',
+    'rates'
 ]
 
 MIDDLEWARE = [
