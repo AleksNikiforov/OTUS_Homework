@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="album py-5 bg-body-tertiary">
+  <div class="container">
+      <div class="col">
+        <div class="card shadow-sm">
+          <h5 class="fw-light">Вы действительно хотите удалить о том что: {{ object.title }}</h5>
+          <form method="POST">
+            {% csrf_token %}
+            <button class="btn btn-danger">Да</button>
+          </form>
+  </div>
+
+{% endblock %}
+
+
+
+
