@@ -10,17 +10,13 @@ from .forms import *
 
 class RatesListView(ListView):
     model = Rates
-    form_class = DesignForm
+    form_class = RatesForm
     def post(self, request, *args, **kwargs):
         if request.method == 'POST':
             data = request.POST
             data = dict(data)
             data.pop("csrfmiddlewaretoken")  
-            print(data)
             person = data['checked_items'][0]
-            print('5'*50)
-            print(person)
-
             ''' Если отмечаем Архитектор то получается ключ со значением Архитектор и стоимостью, аналогично для Инженера
             {'Архитектор': ['Архитектор', '25400.00'],
               'Инженер': ['20400.00'],
@@ -31,16 +27,13 @@ class RatesListView(ListView):
               'checked_items': ['Архитектор']}
               Поэтому нужно делать проверку и вставлять соответствующее значение
               '''
-
             default_num_engineer = 0
             default_num_architect = 0
             if person == 'Архитектор':
                 default_num_architect = -1
             if person == 'Инженер':
                 default_num_engineer = -1
-
             Rates.objects.all().delete()
-
             cat = Rates(person = person,
                         engineer_cost = data['Инженер'][default_num_engineer], 
                         architect_cost = data['Архитектор'][default_num_architect], 
@@ -54,7 +47,6 @@ class RatesListView(ListView):
 
 def final_list(request):
     perechen = Rates.objects.all()
-    print(perechen)
     return render(request, 'rates/rates_final.html', {'perechen': perechen})
 
 

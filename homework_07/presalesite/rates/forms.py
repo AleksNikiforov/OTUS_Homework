@@ -2,7 +2,7 @@ from django import forms
 from .models import *
 
 
-class DesignForm(forms.ModelForm):
+class RatesForm(forms.ModelForm):
 
     name = forms.CharField(label='Описание', widget=forms.TextInput(attrs={'placeholder': 'Наименование','class': 'form-control'}))
 
