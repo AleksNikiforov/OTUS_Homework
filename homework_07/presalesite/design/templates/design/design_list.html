@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <form method="POST">
+    <form method="POST" onsubmit="return submitForm();">
       {% csrf_token %}
 
     <details>
@@ -451,13 +451,21 @@
             checkboxes.forEach(function(checkbox) {
                 checkedItems.push(checkbox.value);
             });
+            if (checkedItems.length === 0) {
+              alert('Нужно отметить хотя бы один элемент');
+              return false;
+          } 
+            else {
             document.getElementById('checked-items').value = checkedItems;
             document.getElementById('list-form').submit();
-        }
+          }
+      }
     </script>
 
+
+
     <input type="hidden" id="checked-items" name="checked_items">
-    <button style="margin-left:50px;" type="submit" onclick="submitForm()" class="btn btn-primary">Добавить в Расчет</button>
+    <button style="margin-left:50px;" type="submit" class="btn btn-primary">Добавить в Расчет</button>
   </div>
   <a style="margin-left:20px;" class="btn btn-danger" href='delete'>Очистить</a>
   </div>
