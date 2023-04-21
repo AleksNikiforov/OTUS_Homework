@@ -40,7 +40,7 @@ class RatesListView(ListView):
                 default_num_engineer = -1
 
             Rates.objects.all().delete()
-            
+
             cat = Rates(person = person,
                         engineer_cost = data['Инженер'][default_num_engineer], 
                         architect_cost = data['Архитектор'][default_num_architect], 
@@ -49,21 +49,12 @@ class RatesListView(ListView):
                         manager_coef = data['Менеджер проекта коэффициент'][0],
                         tech_writer_coef = data['Разработчик технической документации коэффициент'][0])
             cat.save()
-
-            # for n in data.items():                                                         # добавляем записи в БД
-            #     name = n[0]
-            #     days = n[1]
-            #     if days:
-            #         cat = Rates(name = name, days = days)
-            #         cat.save()
-            #     else:
-            #         cat = Rates(name = name)
-            #         cat.save()   
-            # return redirect(reverse_lazy('Final_Rates'))
+            return redirect(reverse_lazy('Final_Rates'))
 
 
 def final_list(request):
     perechen = Rates.objects.all()
+    print(perechen)
     return render(request, 'rates/rates_final.html', {'perechen': perechen})
 
 

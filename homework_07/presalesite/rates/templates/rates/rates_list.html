@@ -2,7 +2,7 @@
 
 	  {% block content %}
 
-      <form method="POST">
+      <form method="POST" onsubmit="return validateForm();">
         {% csrf_token %}
 
             <details>
@@ -88,7 +88,7 @@
 </details>
   
 	  <input type="hidden" id="checked-items" name="checked_items">
-	  <button style="margin-left:50px;" type="submit" onclick="submitForm()" class="btn btn-primary">Добавить в Расчет</button>
+	  <button style="margin-left:50px;" type="submit" onclick="submitForm(); validateForm();" class="btn btn-primary">Добавить в Расчет</button>
 	</div>
 	<a style="margin-left:20px;" class="btn btn-danger" href='delete'>Очистить</a>
 	</div>
@@ -106,13 +106,36 @@
             document.getElementById('list-form').submit();
         }
 
-      function validateForm() {
-        var field1 = document.forms[0]["Инженер"].value;
-        var field2 = document.forms[0]["Архитектор"].value;
-        if (field1 == "" && field2 == "") {
-          alert("Необходимо выбратьпроизводителя работ: инженер или архитектор");
-          return false;
+        function validateForm() {
+          // Get the checkboxes by name attribute
+          let engineerCheckboxes = document.getElementsByName('Инженер');
+          let architectCheckboxes = document.getElementsByName('Архитектор');
+          let isEngineerChecked = false;
+          let isArchitectChecked = false;
+          // Loop through the checkboxes and check if at least one is checked
+          for (let i = 0; i < engineerCheckboxes.length; i++) {
+              if (engineerCheckboxes[i].checked) {
+                  isEngineerChecked = true;
+                  break;
+              }
+          }
+          for (let i = 0; i < architectCheckboxes.length; i++) {
+              if (architectCheckboxes[i].checked) {
+                  isArchitectChecked = true;
+                  break;
+              }
+          }
+          // If no checkbox is checked, show an error message
+          if (!isEngineerChecked && !isArchitectChecked) {
+              alert('Необходимо выбрать, кто будет производить работы: инженер или архитектор');
+              return false;
+          }
+          if (isEngineerChecked && isArchitectChecked) {
+            alert('Необходимо выбрать, кто будет производить работы: только инженер или только архитектор');
+            return false;
         }
+          // If at least one checkbox is checked, submit the form
+          return true;
       }
       </script>
 
