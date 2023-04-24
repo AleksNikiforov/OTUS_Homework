@@ -35,8 +35,6 @@ class ExaminationListView(ListView):
 
 def final_list(request):
     perechen = Examination.objects.all()
-    print(perechen)
-    print('='*50)
     return render(request, 'examination/examination_final.html', {'perechen': perechen})
 
 
